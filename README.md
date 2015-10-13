@@ -1,2 +1,0 @@
-# fresca
-Golf tournament app
