@@ -1,0 +1,8 @@
+<tr>
+  <td><%= tournament_player.player.name_combo %></td>
+  <td><%= tournament_player.tournament_handicap %></td>
+  <td><%= link_to 'Edit', edit_tournament_tournament_player_path(tournament_player.tournament, tournament_player) %></td>
+  <td><%= link_to 'Remove', [tournament_player.tournament, tournament_player],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %></td>
+</tr>

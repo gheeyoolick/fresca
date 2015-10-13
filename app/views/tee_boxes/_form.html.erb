@@ -1,0 +1,59 @@
+<%= form_for ([@tee_box.course, @tee_box]) do |f| %>
+  <% if @tee_box.errors.any? %>
+		<div id="error_explanation">
+      <h2><%= pluralize(@tee_box.errors.count, "error") %> prohibited this tee box from being saved:</h2>
+		  	<ul>
+          <% @tee_box.errors.full_messages.each do |msg| %>
+		    		<li><%= msg %></li>
+		    	<% end %>
+		    </ul>
+		</div>
+	<% end %>
+
+  <%= f.hidden_field :course_id, :value => @tee_box.course.id %>
+
+  <p>
+    <%= f.label :color %>: <%= f.select :color, TeeBox.colors %>
+  </p>
+  <p>
+    <%= f.label :tee_box_type, 'Tee Box Type' %>:
+    <%= f.collection_select :tee_box_type_id, TeeBoxType.all, :id, :tee_box_type %>
+  </p>
+  <p>
+    <%= f.label :mens_course_rating %>: <%= f.text_field :mens_course_rating %>
+  </p>
+  <p>
+    <%= f.label :mens_course_slope %>: <%= f.text_field :mens_course_slope %>
+  </p>
+  <p>
+    <%= f.label :ladies_course_rating %>: <%= f.text_field :ladies_course_rating %>
+  </p>
+  <p>
+    <%= f.label :ladies_course_slope %>: <%= f.text_field :ladies_course_slope %>
+  </p>
+  <p>
+    <table>
+      <tr>
+        <th>Hole Number</th>
+        <th>Yardage</th>
+        <th>Men's Par</th>
+        <th>Men's Handicap</th>
+        <th>Ladies' Par</th>
+        <th>Ladies' Handicap</th>
+      </tr>
+      <%= f.fields_for :holes do |hole| %>
+      <tr>
+        <td><%= hole.hidden_field :id, :value => hole.object.id %><%= hole.object.hole_number %><%= hole.hidden_field :hole_number, :value => hole.object.hole_number %></td>
+        <td><%= hole.text_field :yardage %></td>
+        <td><%= hole.text_field :par_mens %></td>
+        <td><%= hole.text_field :handicap_mens %></td>
+        <td><%= hole.text_field :par_ladies %></td>
+        <td><%= hole.text_field :handicap_ladies %></td>
+      </tr>
+      <% end %>
+    </table>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

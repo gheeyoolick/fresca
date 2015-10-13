@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  phone_number: MyString
+  address: MyString
+  city: MyString
+  state: 
+  zip: MyString
+  course_rating_gold: 9.99
+  course_yardage_gold: 1
+  course_slope_gold: 1
+  course_rating_blue: 9.99
+  course_yardage_blue: 1
+  course_slope_blue: 1
+  course_rating_white: 9.99
+  course_yardage_white: 1
+  course_slope_white: 1
+  course_rating_red: 9.99
+  course_yardage_red: 1
+  course_slope_red: 1
+
+two:
+  name: MyString
+  phone_number: MyString
+  address: MyString
+  city: MyString
+  state: 
+  zip: MyString
+  course_rating_gold: 9.99
+  course_yardage_gold: 1
+  course_slope_gold: 1
+  course_rating_blue: 9.99
+  course_yardage_blue: 1
+  course_slope_blue: 1
+  course_rating_white: 9.99
+  course_yardage_white: 1
+  course_slope_white: 1
+  course_rating_red: 9.99
+  course_yardage_red: 1
+  course_slope_red: 1

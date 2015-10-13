@@ -1,0 +1,40 @@
+<h1><%= link_to 'Courses', courses_path %></h1>
+<h2>Show Course</h2>
+
+<p>
+  <strong>Name:</strong>
+  <%= @course.name %>
+  <br />
+  <strong>Location:</strong>
+  <%= @course.address %>
+  <br />
+  <%= @course.city %>, <%= @course.state %> <%= @course.zip %>
+  <br /><br />
+  <strong>Phone Number:</strong>
+  <%= @course.phone_number %>
+  <br />
+
+Course: <%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to 'Delete', course_path(@course),
+      			method: :delete,
+      			data: { confirm: 'Are you sure?' } %>
+
+  <h2>Tee Boxes</h2>
+  <% if @course.tee_boxes.any? %>
+  <table>
+    <tr>
+      <th>Color</th>
+      <th>Type</th>
+      <th>Mens Rating/Slope</th>
+      <th>Ladies Rating/Slope</th>
+      <th colspan="18">Hole</th>
+      <th>Total</th>
+    </tr>
+    <%= render @course.tee_boxes %>
+  </table>
+  <% else %>
+    <p>No Tee Boxes Defined</p>
+  <% end %>
+<%= link_to 'New Tee Box', new_course_tee_box_path(:course_id => @course.id) %>
+</p>
+<%= link_to 'Back to Courses List', courses_path %>

@@ -1,0 +1,20 @@
+<h1><%= link_to 'Back to Course', course_path(@tee_box.course) %></h1>
+  <p>
+  <strong>Course Name:</strong>
+    <%= @tee_box.course.name %>
+  <br />
+  <strong>Location:</strong>
+  <%= @tee_box.course.address %>
+  <br />
+  <%= @tee_box.course.city %>, <%= @tee_box.course.state %> <%= @tee_box.course.zip %>
+  <br />
+  <strong>Phone Number:</strong>
+  <%= @tee_box.course.phone_number %>
+  <br />
+  </p>
+
+<h2>New Tee Box</h2>
+
+<%= render 'form' %>
+
+<%= link_to 'Back to Course', course_path(@tee_box.course) %>

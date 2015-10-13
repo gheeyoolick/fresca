@@ -1,0 +1,27 @@
+<h1><%= link_to 'Tournaments', tournaments_path %></h1>
+<h2>Edit Tournament</h2>
+
+<%= form_for :tournament, url: tournaments_path do |f| %>
+
+	<% if @tournament.errors.any? %>
+		<div id="error_explanation">
+		  <h2><%= pluralize(@tournament.errors.count, "error") %> prohibited this tournament from being saved:</h2>
+		  	<ul>
+		    	<% @tournament.errors.full_messages.each do |msg| %>
+		    		<li><%= msg %></li>
+		    	<% end %>
+		    </ul>
+		</div>
+	<% end %>
+	<p><%= f.label :title %>: <%=f.text_field :title %></p>
+	<p><%= f.label :subtitle %>: <%=f.text_field :subtitle %></p>
+	<p><%= f.label :tournament_date %>: <%=f.text_field :tournament_date %></p>
+  <p><%= f.label :location %>: <%=f.text_field :location %></p>
+  <p><%= f.label :tournament_type, 'Tournament Type' %>: <%= @tournament.tournament_type.tournament_type %><%= f.hidden_field :tournament_type_id, :value => @tournament.tournament_type_id %></p>
+  <p><%= f.label :handicap, 'Use Handicap?' %> <%= f.check_box :handicap %></p>
+
+	<p><%= f.submit %></p>
+
+<% end %>
+
+<%= link_to 'Back', tournaments_path %>

@@ -1,0 +1,48 @@
+<h1><%= link_to 'Tournaments', tournaments_path %></h1>
+<h2>Show Tournament</h2>
+
+<div>
+  <strong>Tournament:</strong>
+  <%= @tournament.title %><% if @tournament.subtitle.length > 0 %>, <%=	@tournament.subtitle %><% end %>
+  <br />
+  <strong>Date:</strong>
+  <%= @tournament.tournament_date %>
+  <br />
+  <strong>Location:</strong>
+  <%= @tournament.location %>
+  <br />
+  <strong>Type:</strong>
+  <%= @tournament.tournament_type.tournament_type %>
+  <br />
+  <strong>Use Handicap?:</strong>
+  <%= @tournament.handicap? %>
+  <br />
+<%= link_to 'Edit', edit_tournament_path(@tournament) %> <% if !@tournament.started? %> | <%= link_to 'Delete', tournament_path(@tournament), method: :delete, data: { confirm: 'Are you sure?' } %> <% end %>
+  <div>
+    <h2>Tournament Players</h2>
+    <% if @tournament.tournament_players.any? %>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Tournament Handicap</th>
+      </tr>
+      <%= render @tournament.tournament_players %>
+    </table>
+    <% else %>
+      <p>No Players Added</p>
+    <% end %>
+    <%= link_to 'Add Player to Tournament', new_tournament_tournament_player_path(:tournament_id => @tournament.id) %>
+  </div>
+  <% if @tournament.tournament_type.tournament_type!=TournamentType.individual %>
+  <div>
+    <h2>Tournament Teams</h2>
+    <% if @tournament.teams.any? %>
+      <%= render @tournament.teams %>
+    <% else %>
+      <p>No Teams Added</p>
+    <% end %>
+    <% if @tournament.tournament_type.tournament_type!=TournamentType.twoteam and @tournament.tournament_type.tournament_type!=TournamentType.individual %><%= link_to 'Add Team to Tournament', new_tournament_team_path(:tournament_id => @tournament.id) %> <% end %>
+  </div>
+  <% end %>
+<%= link_to 'Back to Tournaments List', tournaments_path %>
+</div>

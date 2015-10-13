@@ -1,0 +1,14 @@
+<h1><%= link_to 'Back to Tournament', tournament_path(@tournament_player.tournament) %></h1>
+  <p>
+  <strong>Tournament:</strong>
+    <%= @tournament_player.tournament.title %><% if @tournament_player.tournament.subtitle.length > 0 %>, <%=	@tournament_player.tournament.subtitle %><% end %>
+  <br />
+  <strong>Date:</strong>
+    <%= @tournament_player.tournament.tournament_date %>
+  <br />
+  <strong>Location:</strong>
+  <%= @tournament_player.tournament.location %>
+  <br />
+  </p>
+
+<h2>Edit Tournament Player</h2>
