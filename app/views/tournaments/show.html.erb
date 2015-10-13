@@ -31,7 +31,7 @@
     <% else %>
       <p>No Players Added</p>
     <% end %>
-    <%= link_to 'Add Player to Tournament', new_tournament_tournament_player_path(:tournament_id => @tournament.id) %>
+    <a href='/tournaments/<%= @tournament.id %>/add_tournament_players/'>Add Player to Tournament</a>
   </div>
   <% if @tournament.tournament_type.tournament_type!=TournamentType.individual %>
   <div>

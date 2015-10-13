@@ -17,11 +17,14 @@ Rails.application.routes.draw do
   #   resources :products
   resources :players
   resources :tournaments do
-    resources :tournament_players, :rounds, :teams
+    resources :rounds, :teams
+    resources :tournament_players, :only => [:edit, :update, :destroy]
   end
   resources :courses do
     resources :tee_boxes
   end
+
+  get 'tournaments/:tournament_id/add_tournament_players', to: 'tournaments#add_tournament_players'
 
   # Example resource route with options:
   #   resources :products do
