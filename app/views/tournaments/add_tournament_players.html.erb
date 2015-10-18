@@ -1,0 +1,40 @@
+<h1><%= link_to 'Back to Tournament', tournament_path(@tournament) %></h1>
+  <p>
+  <strong>Tournament:</strong>
+    <%= @tournament.title %><% if @tournament.subtitle.length > 0 %>, <%=	@tournament.subtitle %><% end %>
+  <br />
+  <strong>Date:</strong>
+    <%= @tournament.tournament_date %>
+  <br />
+  <strong>Location:</strong>
+  <%= @tournament.location %>
+  <br />
+  </p>
+
+<h2>Add Player to Tournament</h2>
+
+<%= form_for :tournament, url: {action: "save_tournament_players"} do |f| %>
+<% if @tournament.errors.any? %>
+		<div id="error_explanation">
+      <h2><%= pluralize(@tournament.errors.count, "error") %> prohibited this tournament from being saved:</h2>
+		  	<ul>
+          <% @tournament.errors.full_messages.each do |msg| %>
+		    		<li><%= msg %></li>
+		    	<% end %>
+		    </ul>
+		</div>
+	<% end %>
+  <!-- this was the old way -->
+  <p>
+    <%= f.select(:player_ids, Tournament.get_eligible_players(@tournament.id).order(:last_name, :first_name).collect {|player| [player.name_combo, player.id]}, {}, {:multiple => true, size: 10}) %>
+  </p>
+  <!-- this is the new way -->
+  <p>
+    <%= hidden_field_tag "tournament[player_ids][]" %> <% Tournament.get_eligible_players(@tournament.id).order(:last_name, :first_name).collect.each do |player| %> <%= check_box_tag "tournament[player_ids][]", player.id, @tournament.player_ids.include?(player.id)%> <%= player.name_combo %> <% end %>
+  </p>
+  <p>
+    <%= f.submit "Add Players to Tournament" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back to Tournament', tournament_path(@tournament) %>
