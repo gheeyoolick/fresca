@@ -24,7 +24,8 @@ Rails.application.routes.draw do
     resources :tee_boxes
   end
 
-  get 'tournaments/:tournament_id/add_tournament_players', to: 'tournaments#add_tournament_players'
+  get 'tournaments/:id/add_tournament_players', to: 'tournaments#add_tournament_players', as: :add_tournament_players
+  post 'tournaments/:id/save_tournament_players', to: 'tournaments#save_tournament_players', as: :save_tournament_players
 
   # Example resource route with options:
   #   resources :products do

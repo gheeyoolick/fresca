@@ -16,8 +16,4 @@ class Player < ActiveRecord::Base
     combo
   end
 
-  def self.get_eligible_players (tournament_id)
-    players = Player.all #where("tournament_id = ?", tournament_id).order("team_number DESC").take
-    players
-  end
 end

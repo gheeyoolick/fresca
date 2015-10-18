@@ -34,13 +34,32 @@ class TournamentsController < ApplicationController
 	def update
 	  @tournament = Tournament.find(params[:id])
 
-    #not sure if this will work
+    #if tourney hasn't started and the update works
     if !@tournament.started? and @tournament.update(tournament_params)
 	    redirect_to @tournament
 	  else
 	    render 'edit'
 	  end
 	end
+
+  def add_tournament_players
+    @tournament = Tournament.find(params[:id])
+  end
+
+  def save_tournament_players
+    @tournament = Tournament.find(params[:id])
+
+    #if tourney hasn't started and the update works
+    if !@tournament.started? and @tournament.update(tournament_params)
+      @tournament.tournament_players.each do |player|
+        player.tournament_handicap = player.player.handicap
+        player.save
+      end
+      redirect_to @tournament
+	  else
+	    render 'edit'
+	  end
+  end
 
 	def destroy
   	@tournament = Tournament.find(params[:id])
@@ -51,6 +70,6 @@ class TournamentsController < ApplicationController
 
 	private
 		def tournament_params
-			params.require(:tournament).permit(:title, :subtitle, :tournament_date, :location, :tournament_type_id, :handicap)
+			params.require(:tournament).permit(:title, :subtitle, :tournament_date, :location, :tournament_type_id, :handicap, player_ids: [])
 		end
 end
