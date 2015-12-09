@@ -8,7 +8,6 @@ class TournamentPlayer < ActiveRecord::Base
   has_many :tournament_player_rounds, :dependent => :destroy
   has_many :rounds, :through => :tournament_player_rounds
 
-  has_one :team_player, :dependent => :destroy
-  has_one :team, :through => :team_player
+  default_scope {joins(:player).order('players.last_name DESC, players.first_name DESC')}
 
 end

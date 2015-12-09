@@ -33,7 +33,8 @@ class TeamsController < ApplicationController
 
   def update
     tournament = Tournament.find(params[:tournament_id])
-    @teams = tournament.teams.find(params[:id])
+    puts "WOOHOO!"+params.to_s
+    @team = tournament.teams.find(params[:id])
 
     if @team.update(team_params)
       redirect_to tournament
@@ -41,6 +42,23 @@ class TeamsController < ApplicationController
 	    render 'edit'
 	  end
 	end
+
+  def add_team_players
+    tournament = Tournament.find(params[:tournament_id])
+    @team = tournament.teams.find(params[:team_id])
+  end
+
+  def save_team_players
+    tournament = Tournament.find(params[:tournament_id])
+    @team = tournament.teams.find(params[:team_id])
+
+    #if tourney hasn't started and the update works
+    if !tournament.started? and @team.update(team_params)
+      redirect_to @team.tournament
+	  else
+      render 'add_team_players'
+	  end
+  end
 
   def destroy
     tournament = Tournament.find(params[:tournament_id])
@@ -54,6 +72,6 @@ class TeamsController < ApplicationController
 
   private
   def team_params
-    params.require(:team).permit(:name, :team_number)
+    params.require(:team).permit(:name, :team_number, tournament_player_ids: [])
     end
 end

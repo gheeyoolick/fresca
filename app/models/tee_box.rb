@@ -3,7 +3,7 @@ class TeeBox < ActiveRecord::Base
   include FrescaModules::ClassLevelInheritableAttributes
 
   inheritable_attributes :colors
-  @colors=['BOOMBOOM', 'TIPS', 'BLUE','WHITE','RED','GOLD','BLACK','GREEN','ORANGE']
+  @colors=['BOOMBOOM', 'TIPS', 'BLUE','WHITE','RED','GOLD','BLACK','GREEN','ORANGE','COPPER', 'SILVER']
 
   validates :color, presence: true
 

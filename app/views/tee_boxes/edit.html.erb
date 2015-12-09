@@ -15,23 +15,6 @@
 
 <h2>Edit Tee Box</h2>
 
-<%= form_for ([@tournament_player.tournament, @tournament_player]) do |f| %>
-<% if @tournament_player.errors.any? %>
-		<div id="error_explanation">
-      <h2><%= pluralize(@tournament_player.errors.count, "error") %> prohibited this tournament_player from being saved:</h2>
-		  	<ul>
-          <% @tournament_player.errors.full_messages.each do |msg| %>
-		    		<li><%= msg %></li>
-		    	<% end %>
-		    </ul>
-		</div>
-	<% end %>
-  <p>
-    <%= f.label :player_id %>: <%= f.collection_select(:player_id, Player.all.order(:last_name, :first_name), :id, :name_combo) %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+<%= render 'form' %>
 
-<%= link_to 'Back to Tournament', tournament_path(@tournament_player.tournament) %>
+<%= link_to 'Back to Course', course_path(@tee_box.course) %>

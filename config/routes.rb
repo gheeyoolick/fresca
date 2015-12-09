@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   get 'tournaments/:id/add_tournament_players', to: 'tournaments#add_tournament_players', as: :add_tournament_players
   post 'tournaments/:id/save_tournament_players', to: 'tournaments#save_tournament_players', as: :save_tournament_players
 
+  get 'tournaments/:tournament_id/teams/:team_id/add_team_players', to: 'teams#add_team_players', as: :add_team_players
+  post 'tournaments/:tournament_id/teams/:team_id/save_team_players', to: 'teams#save_team_players', as: :save_team_players
+  
   # Example resource route with options:
   #   resources :products do
   #     member do

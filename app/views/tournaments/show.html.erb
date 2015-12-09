@@ -26,12 +26,12 @@
         <th>Name</th>
         <th>Tournament Handicap</th>
       </tr>
-      <%= render @tournament.tournament_players %>
+      <%= render @tournament.tournament_players.sort_by {|tp| tp.player.name_combo} %>
     </table>
     <% else %>
       <p>No Players Added</p>
     <% end %>
-    <a href='/tournaments/<%= @tournament.id %>/add_tournament_players/'>Add Player to Tournament</a>
+    <a href='/tournaments/<%= @tournament.id %>/add_tournament_players/'>Add/Remove Players from Tournament</a>
   </div>
   <% if @tournament.tournament_type.tournament_type!=TournamentType.individual %>
   <div>
@@ -41,7 +41,7 @@
     <% else %>
       <p>No Teams Added</p>
     <% end %>
-    <% if @tournament.tournament_type.tournament_type!=TournamentType.twoteam and @tournament.tournament_type.tournament_type!=TournamentType.individual %><%= link_to 'Add Team to Tournament', new_tournament_team_path(:tournament_id => @tournament.id) %> <% end %>
+    <% if @tournament.tournament_type.tournament_type!=TournamentType.twoteam %><%= link_to 'Add Team to Tournament', new_tournament_team_path(:tournament_id => @tournament.id) %> <% end %>
   </div>
   <% end %>
 <%= link_to 'Back to Tournaments List', tournaments_path %>

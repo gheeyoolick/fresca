@@ -57,7 +57,7 @@ class TournamentsController < ApplicationController
       end
       redirect_to @tournament
 	  else
-	    render 'edit'
+      render 'add_tournament_players'
 	  end
   end
 

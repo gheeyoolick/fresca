@@ -1,14 +1,13 @@
 <div>
 <table>
-  <tr><th colspan=3>Team <%= team.team_number %>: <%= team.name %></th></tr>
-  <% team.team_players.each do |player| %>
-  <tr><td><%= player.last_name %></td><td><%= player.first_name %></td><td><%= player.nickname %></td></tr>
+  <tr><th>Team <%= team.team_number %>: <%= team.name %></th></tr>
+  <% team.team_players.each do |team_player| %>
+  <tr><td><%= team_player.player.last_name %>, <%= team_player.player.first_name %></td></tr>
   <% end %>
-  <tr><td colspan=3>
-    <% if team.tournament.tournament_type.tournament_type==TournamentType.twoteam %>
-    <%= link_to 'Edit/Add Players', edit_tournament_team_path(team.tournament, team) %>
-    <% else %>
-    <%= link_to 'Edit/Add Players', edit_tournament_team_path(team.tournament, team) %> | <%= link_to 'Delete', [team.tournament, team],
+  <tr><td>
+    <%= link_to 'Change Team Name', edit_tournament_team_path(team.tournament, team) %> | <a href='/tournaments/<%= @tournament.id %>/teams/<%= team.id %>/add_team_players/'>Add Player to Team</a>
+    <% if team.tournament.tournament_type.tournament_type!=TournamentType.twoteam %>
+     | <%= link_to 'Delete', [team.tournament, team],
                method: :delete,
                data: { confirm: 'Are you sure?' } %></td></tr>
     <% end %>

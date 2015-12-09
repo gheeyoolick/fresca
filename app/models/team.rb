@@ -6,8 +6,32 @@ class Team < ActiveRecord::Base
   belongs_to :tournament
   has_many :team_players, :dependent => :destroy
   has_many :tournament_players, :through => :team_players
-  #has_many :team_holes, :dependent => :destroy
-  #has_many :holes, :through => :team_holes
+
+  def self.get_eligible_players (tournament_id, team_id)
+    puts "LOOKIE: Inside get eligible players"
+    tournament = Tournament.find(tournament_id)
+    puts "LOOKIE: Tournament Id:"&tournament.id.to_s
+    player_array = [""]
+    players_added = false
+    tournament.teams.each do |team|
+      puts "LOOKIE: Inside Team Loop for Tournament "&tournament.id.to_s&" Team "&team.team_number.to_s
+      team.team_players.each do |team_player|
+        puts "LOOKIE: Inside Player Loop for Team "&team.team_number.to_s
+        players_added = true
+        if team_player.team_id != team_id
+          player_array.push(team_player.tournament_player_id)
+          puts player_array.to_s
+        end
+      end
+    end
+    if players_added
+      tournament_players = TournamentPlayer.where("tournament_id = ? AND id NOT IN ?", tournament_id, player_array)
+    else
+      tournament_players = TournamentPlayer.where(tournament_id: tournament_id)
+    end
+    tournament_players
+
+  end
 
   def self.get_next_team_number (tournament_id)
     team = Team.where("tournament_id = ?", tournament_id).order("team_number DESC").take
