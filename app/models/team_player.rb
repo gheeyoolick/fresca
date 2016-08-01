@@ -7,5 +7,6 @@ class TeamPlayer < ActiveRecord::Base
   has_many :matches, :through => :match_players
 
   has_one :player, :through => :tournament_player
+  default_scope {joins(:player).order('players.last_name ASC, players.first_name ASC')}
 
 end

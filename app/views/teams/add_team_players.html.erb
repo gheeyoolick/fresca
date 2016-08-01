@@ -27,7 +27,7 @@
     <%= hidden_field_tag "team[tournament_player_ids][]" %> <% Team.get_eligible_players(@team.tournament.id, @team.id).sort_by {|tp| tp.player.name_combo}.each do |tournament_player| %> <%= check_box_tag "team[tournament_player_ids][]", tournament_player.id, @team.tournament_player_ids.include?(tournament_player.id)%> <%= tournament_player.player.name_combo %> <br /><% end %>
   </p>
   <p>
-    <%= f.submit "Add Players to Team" %>
+    <%= f.submit "Add/Remove Team Players" %>
   </p>
 <% end %>
 
