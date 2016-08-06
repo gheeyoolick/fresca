@@ -1,5 +1,7 @@
 class MatchPlayer < ActiveRecord::Base
-
+  
+  validates :strokes_given, presence: true
+  
   belongs_to :match
   belongs_to :team_player
 

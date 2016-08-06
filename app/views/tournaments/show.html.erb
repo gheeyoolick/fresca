@@ -17,6 +17,9 @@
   <strong>Use Handicap?:</strong>
   <%= @tournament.handicap? %>
   <br />
+  <strong>Use Tournament Handicap Only, rather than Course Specific Handicap?:</strong>
+  <%= @tournament.tournament_handicap_only? %>
+  <br />
 <%= link_to 'Edit', edit_tournament_path(@tournament) %> <% if !@tournament.started? %> | <%= link_to 'Delete', tournament_path(@tournament), method: :delete, data: { confirm: 'Are you sure?' } %> <% end %>
   <div>
     <h2>Tournament Players</h2>
@@ -24,6 +27,7 @@
     <table>
       <tr>
         <th>Name</th>
+        <th>USGA Handicap</th>
         <th>Tournament Handicap</th>
       </tr>
       <%= render @tournament.tournament_players.sort_by {|tp| tp.player.name_combo} %>
@@ -42,6 +46,10 @@
       <p>No Teams Added</p>
     <% end %>
     <% if @tournament.tournament_type.tournament_type!=TournamentType.twoteam %><%= link_to 'Add Team to Tournament', new_tournament_team_path(:tournament_id => @tournament.id) %> <% end %>
+  </div>
+  <div>
+    <h2>Rounds</h2>
+    <%= link_to 'Add Round to Tournament', new_tournament_round_path(:tournament_id => @tournament.id) %>
   </div>
   <% end %>
 <%= link_to 'Back to Tournaments List', tournaments_path %>

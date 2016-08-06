@@ -25,7 +25,8 @@
 	<% end %>
   <p>
     <h3><%= @tournament_player.player.name_combo %></h3>
-<%= f.label :tournament_handicap %>: <%= f.text_field :tournament_handicap %>
+    <label>USGA Handicap:</label> <%= @tournament_player.player.handicap %><br />
+    <%= f.label :tournament_handicap %>: <%= f.text_field :tournament_handicap %>
   </p>
   <p>
     <%= f.submit %>

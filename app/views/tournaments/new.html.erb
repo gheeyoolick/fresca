@@ -17,9 +17,10 @@
 	<p><%= f.label :subtitle %>: <%=f.text_field :subtitle %></p>
 	<p><%= f.label :tournament_date %>: <%=f.text_field :tournament_date %> (Format YYYY/MM/DD)</p>
   <p><%= f.label :location %>: <%=f.text_field :location %></p>
-  <p><%= f.label :tournament_type, 'Tournament Type' %>: <%= f.collection_select :tournament_type_id, TournamentType.all, :id, :tournament_type %></p> Note: Once saved, the Tournament Type cannot be changed.
+  <p><%= f.label :tournament_type, 'Tournament Type' %>: <%= f.collection_select :tournament_type_id, TournamentType.all, :id, :tournament_type %>Note: Once saved, the Tournament Type cannot be changed.</p>
   <p><%= f.label :handicap, 'Use Handicap?' %> <%= f.check_box :handicap %></p>
-  
+  <p><%= f.label :tournament_handicap_only, 'Use Tournament Handicap Only, rather than Course Specific Handicap?' %> <%= f.check_box :tournament_handicap_only %></p>
+
   <p><%= f.submit %></p>
 
 <% end %>

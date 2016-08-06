@@ -15,7 +15,7 @@ class TeeBoxesController < ApplicationController
     course = Course.find(params[:course_id])
     @tee_box = course.tee_boxes.build
     hn = 0
-    18.times {
+    course.number_of_holes.times {
       hn+=1
       @tee_box.holes.build(:hole_number=>hn)
     }
@@ -61,6 +61,6 @@ class TeeBoxesController < ApplicationController
 
   private
   def tee_box_params
-    params.require(:tee_box).permit(:course_id, :color, :tee_box_type_id, :mens_course_rating, :mens_course_slope, :ladies_course_rating, :ladies_course_slope, holes_attributes: [ :id, :hole_number, :yardage, :par_mens, :handicap_mens, :par_ladies, :handicap_ladies ])
+    params.require(:tee_box).permit(:course_id, :color, :tee_box_type_id, :course_rating, :course_slope, holes_attributes: [ :id, :hole_number, :yardage, :par, :handicap ])
     end
 end

@@ -20,35 +20,25 @@
     <%= f.collection_select :tee_box_type_id, TeeBoxType.all, :id, :tee_box_type %>
   </p>
   <p>
-    <%= f.label :mens_course_rating %>: <%= f.text_field :mens_course_rating %>
+    <%= f.label :course_rating %>: <%= f.text_field :course_rating %>
   </p>
   <p>
-    <%= f.label :mens_course_slope %>: <%= f.text_field :mens_course_slope %>
-  </p>
-  <p>
-    <%= f.label :ladies_course_rating %>: <%= f.text_field :ladies_course_rating %>
-  </p>
-  <p>
-    <%= f.label :ladies_course_slope %>: <%= f.text_field :ladies_course_slope %>
+    <%= f.label :course_slope %>: <%= f.text_field :course_slope %>
   </p>
   <p>
     <table>
       <tr>
         <th>Hole Number</th>
         <th>Yardage</th>
-        <th>Men's Par</th>
-        <th>Men's Handicap</th>
-        <th>Ladies' Par</th>
-        <th>Ladies' Handicap</th>
+        <th>Par</th>
+        <th>Handicap</th>
       </tr>
       <%= f.fields_for :holes do |hole| %>
       <tr>
         <td><%= hole.hidden_field :id, :value => hole.object.id %><%= hole.object.hole_number %><%= hole.hidden_field :hole_number, :value => hole.object.hole_number %></td>
         <td><%= hole.text_field :yardage %></td>
-        <td><%= hole.text_field :par_mens %></td>
-        <td><%= hole.text_field :handicap_mens %></td>
-        <td><%= hole.text_field :par_ladies %></td>
-        <td><%= hole.text_field :handicap_ladies %></td>
+        <td><%= hole.text_field :par %></td>
+        <td><%= hole.text_field :handicap %></td>
       </tr>
       <% end %>
     </table>

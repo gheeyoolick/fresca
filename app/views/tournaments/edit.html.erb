@@ -19,6 +19,7 @@
   <p><%= f.label :location %>: <%=f.text_field :location %></p>
   <p><%= f.label :tournament_type, 'Tournament Type' %>: <%= @tournament.tournament_type.tournament_type %><%= f.hidden_field :tournament_type_id, :value => @tournament.tournament_type_id %></p>
   <p><%= f.label :handicap, 'Use Handicap?' %> <%= f.check_box :handicap %></p>
+  <p><%= f.label :handicap, 'Use Tournament Handicap Only, rather than Course Specific Handicap?' %> <%= f.check_box :tournament_handicap_only %></p>
 
 	<p><%= f.submit %></p>
 

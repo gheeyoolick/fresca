@@ -15,6 +15,6 @@ class HolesController < ApplicationController
   
   private
   def hole_params
-    params.permit(:hole_number, :par_mens, :handicap_mens, :par_ladies, :handicap_ladies, :yardage)
+    params.permit(:hole_number, :par, :handicap, :yardage)
     end
 end

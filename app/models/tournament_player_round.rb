@@ -1,7 +1,7 @@
 class TournamentPlayerRound < ActiveRecord::Base
 
   validates :total_natural_score, presence: true
-  validates :round_handicap_modifier, presence: true
+  validates :round_stokes_given, presence: true
 
   belongs_to :tournament_player
   belongs_to :round

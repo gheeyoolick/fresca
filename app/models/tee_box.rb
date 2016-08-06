@@ -7,7 +7,7 @@ class TeeBox < ActiveRecord::Base
 
   validates :color, presence: true
 
-  default_scope { order(:total_yardage_dirty => :desc)}
+  default_scope { order(:tee_box_type_id => :asc, :total_yardage_dirty => :desc)}
 
   has_many :holes, :dependent => :destroy
   accepts_nested_attributes_for :holes
@@ -28,25 +28,13 @@ class TeeBox < ActiveRecord::Base
     end
   end
 
-  def total_par_mens
+  def total_par
     if self.holes.count != 0
       tpm = 0
       self.holes.each do |hole|
-        tpm+=hole.par_mens
+        tpm+=hole.par
       end
       tpm
-    else
-      0
-    end
-  end
-
-  def total_par_ladies
-    if self.holes.count != 0
-      tpl = 0
-      self.holes.each do |hole|
-        tpl+=hole.par_ladies
-      end
-      tpl
     else
       0
     end

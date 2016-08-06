@@ -16,8 +16,8 @@
 	<p><%= f.label :state %> <%=f.text_field :state %></p>
 	<p><%= f.label :zip %> <%=f.text_field :zip %></p>
 	<p><%= f.label :phone_number %> <%=f.text_field :phone_number %></p>
-  <p><%= f.label :number_of_holes, '# of Holes on Course' %> <%= f.select :number_of_holes, [18]%></p>
-  <%= f.hidden_field :par3, :value => false %>
+  <p><%= f.label :number_of_holes, '# of Holes on Course' %> <%= f.select :number_of_holes, [9, 18]%> Note: Once saved, the number of holes on the course cannot be changed.</p>
+  <p><%= f.label :par3, 'Is it a Par 3 Course?' %> <%= f.select :par3, [true, false]%> Note: Once saved, this course canot be changed into a Par 3 course.</p>
   <p><%= f.submit %></p>
 
 <% end %>

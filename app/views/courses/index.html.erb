@@ -7,6 +7,7 @@
 		<th>City</th>
 		<th>State</th>
 		<th>Zip</th>
+    <th>Number of Holes</th>
     <th>Par 3?</th>
 	</tr>
 	<% @courses.each do |course| %>
@@ -16,6 +17,7 @@
 			<td><%= course.city %></td>
 			<td><%= course.state %></td>
 			<td><%= course.zip %></td>
+      <td><%= course.number_of_holes %>
       <td><%= course.par3? %></td>
       <td><%= link_to 'Show', course_path(course) %></td>
       <td><%= link_to 'Edit', edit_course_path(course) %></td>

@@ -2,10 +2,9 @@ class TeeBoxType < ActiveRecord::Base
 
   include FrescaModules::ClassLevelInheritableAttributes
 
-  inheritable_attributes :mens, :ladies, :both
+  inheritable_attributes :mens, :ladies
   @mens='MENS'
   @ladies='LADIES'
-  @both='BOTH'
 
   validates :tee_box_type, presence: true
 

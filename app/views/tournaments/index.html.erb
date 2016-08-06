@@ -6,7 +6,8 @@
 		<th>Location</th>
 		<th>Date</th>
     <th>Type</th>
-    <th>Handicap</th>
+    <th>Use Handicap?</th>
+    <th>Tournmant Handicap Only?</th>
 	</tr>
 	<% @tournaments.each do |tournament| %>
 		<tr>
@@ -14,7 +15,8 @@
 			<td><%= tournament.location %></td>
 			<td><%= tournament.tournament_date %></td>
       <td><%= tournament.tournament_type.tournament_type %></td>
-      <td><%= tournament.handicap %></td>
+      <td><%= tournament.handicap? %></td>
+      <td><%= tournament.tournament_handicap_only? %></td>
       <% if !tournament.started? %>
       <td><%= link_to 'Show/Configure', tournament_path(tournament) %></td>
       <td><%= link_to 'Edit', edit_tournament_path(tournament) %></td>

@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
 
 	def index
-		@courses = Course.all.order(:name)
+		@courses = Course.all.order('number_of_holes DESC', :name)
 	end
 
 	def show

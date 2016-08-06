@@ -6,6 +6,7 @@ class CreateTournaments < ActiveRecord::Migration
       t.string :subtitle
       t.string :location
       t.boolean :handicap, default: false
+      t.boolean :tournament_handicap_only, default: true
       t.boolean :male_players, default: true
       t.boolean :female_players, default: false
       t.boolean :started, default: false

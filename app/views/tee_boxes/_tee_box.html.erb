@@ -1,16 +1,7 @@
     <tr class='<%= tee_box.color.downcase %>_tee_box'>
       <td><%= tee_box.color %></td>
       <td><%= tee_box.tee_box_type.tee_box_type %></td>
-      <% if tee_box.tee_box_type.tee_box_type == TeeBoxType.mens %>
-        <td><%= tee_box.mens_course_rating %>/<%= tee_box.mens_course_slope %></td>
-        <td></td>
-      <% else if tee_box.tee_box_type.tee_box_type == TeeBoxType.ladies %>
-        <td></td>
-        <td><%= tee_box.ladies_course_rating %>/<%= tee_box.ladies_course_slope %></td>
-      <% else %>
-        <td><%= tee_box.mens_course_rating %>/<%= tee_box.mens_course_slope %></td>
-        <td><%= tee_box.ladies_course_rating %>/<%= tee_box.ladies_course_slope %></td>
-      <% end end %>
+      <td><%= tee_box.course_rating %>/<%= tee_box.course_slope %></td>
       <% tee_box.holes.each do |hole| %>
         <td><%=hole.hole_number %></td>
       <% end %>
@@ -19,97 +10,30 @@
     <tr class='<%= tee_box.color.downcase %>_tee_box'>
       <td></td>
       <td></td>
-      <td></td>
       <td>Yardage</td>
       <% tee_box.holes.each do |hole| %>
         <td><%=hole.yardage %></td>
       <% end %>
       <td><%= tee_box.total_yardage %></td>
     </tr>
-    <% if tee_box.tee_box_type.tee_box_type == TeeBoxType.mens %>
-      <tr class='<%= tee_box.color.downcase %>_tee_box'>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>Men's Par</td>
-        <% tee_box.holes.each do |hole| %>
-          <td><%=hole.par_mens %></td>
-        <% end %>
-        <td><%= tee_box.total_par_mens %></td>
-      </tr>
-      <tr class='<%= tee_box.color.downcase %>_tee_box'>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>Men's Handicap</td>
-        <% tee_box.holes.each do |hole| %>
-        <td><%=hole.handicap_mens %></td>
-        <% end %>
-        <td></td>
-      </tr>
-    <% else if tee_box.tee_box_type.tee_box_type == TeeBoxType.ladies %>
-      <tr class='<%= tee_box.color.downcase %>_tee_box'>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>Ladies' Par</td>
-        <% tee_box.holes.each do |hole| %>
-        <td><%=hole.par_ladies %></td>
-        <% end %>
-        <td><%= tee_box.total_par_ladies %></td>
-      </tr>
-      <tr class='<%= tee_box.color.downcase %>_tee_box'>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>Ladies' Handicap</td>
-        <% tee_box.holes.each do |hole| %>
-        <td><%=hole.handicap_ladies %></td>
-        <% end %>
-        <td></td>
-      </tr>
-    <% else %>
-      <tr class='<%= tee_box.color.downcase %>_tee_box'>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>Men's Par</td>
-        <% tee_box.holes.each do |hole| %>
-          <td><%=hole.par_mens %></td>
-        <% end %>
-        <td><%= tee_box.total_par_mens %></td>
-      </tr>
-      <tr class='<%= tee_box.color.downcase %>_tee_box'>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>Men's Handicap</td>
-        <% tee_box.holes.each do |hole| %>
-        <td><%=hole.handicap_mens %></td>
-        <% end %>
-        <td></td>
-      </tr>
-      <tr class='<%= tee_box.color.downcase %>_tee_box'>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>Mens' Par</td>
-        <% tee_box.holes.each do |hole| %>
-        <td><%=hole.par_ladies %></td>
-        <% end %>
-        <td><%= tee_box.total_par_ladies %></td>
-      </tr>
-      <tr class='<%= tee_box.color.downcase %>_tee_box'>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>Ladies' Handicap</td>
-        <% tee_box.holes.each do |hole| %>
-        <td><%=hole.handicap_ladies %></td>
-        <% end %>
-        <td></td>
-      </tr>
-    <% end end %>
+    <tr class='<%= tee_box.color.downcase %>_tee_box'>
+      <td></td>
+      <td></td>
+      <td>Par</td>
+      <% tee_box.holes.each do |hole| %>
+        <td><%=hole.par %></td>
+      <% end %>
+      <td><%= tee_box.total_par %></td>
+    </tr>
+    <tr class='<%= tee_box.color.downcase %>_tee_box'>
+      <td></td>
+      <td></td>
+      <td>Handicap</td>
+      <% tee_box.holes.each do |hole| %>
+        <td><%=hole.handicap %></td>
+      <% end %>
+      <td></td>
+    </tr>
     <tr class=tee_box_delete_row>
       <td colspan="23">
         Tee Box: <%= link_to 'Edit', edit_course_tee_box_path(tee_box.course, tee_box) %> | <%= link_to 'Delete', [tee_box.course, tee_box],

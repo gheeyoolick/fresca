@@ -13,6 +13,12 @@
   <strong>Phone Number:</strong>
   <%= @course.phone_number %>
   <br />
+  <strong>Holes:</strong>
+  <%= @course.number_of_holes %>
+  <br />
+  <strong>Par 3?:</strong>
+  <%= @course.par3 %>
+  <br />
 
 Course: <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Delete', course_path(@course),

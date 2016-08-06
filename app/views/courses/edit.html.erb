@@ -1,6 +1,28 @@
 <h1><%= link_to 'Courses', courses_path %></h1>
 <h2>Edit Course</h2>
- 
-<%= render 'form' %>
- 
+
+<%= form_for @course do |f| %>
+
+	<% if @course.errors.any? %>
+		<div id="error_explanation">
+		  <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
+		  	<ul>
+		    	<% @course.errors.full_messages.each do |msg| %>
+		    		<li><%= msg %></li>
+		    	<% end %>
+		    </ul>
+		</div>
+	<% end %>
+	<p><%= f.label :name %> <%=f.text_field :name %></p>
+	<p><%= f.label :address %> <%=f.text_field :address %></p>
+	<p><%= f.label :city %> <%=f.text_field :city %></p>
+	<p><%= f.label :state %> <%=f.text_field :state %></p>
+	<p><%= f.label :zip %> <%=f.text_field :zip %></p>
+	<p><%= f.label :phone_number %> <%=f.text_field :phone_number %></p>
+  <p><%= f.label :number_of_holes, '# of Holes on Course' %>: <%= @course.number_of_holes %><%= f.hidden_field :number_of_holes, :value => @course.number_of_holes %></p>
+  <p><%= f.label :par3, 'Is it a Par 3 Course?' %>: <%= @course.par3? %><%= f.hidden_field :par3, :value => @course.par3? %></p>
+  <p><%= f.submit %></p>
+
+<% end %>
+
 <%= link_to 'Back to Course List', courses_path %>

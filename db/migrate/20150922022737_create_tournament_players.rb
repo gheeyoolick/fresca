@@ -4,7 +4,8 @@ class CreateTournamentPlayers < ActiveRecord::Migration
 
       t.decimal :tournament_handicap, default: 0
 
-      default_scope joins(:player).order('players.last_name DESC, players.first_name DESC')
+      #not sure why this doesn't work in migration
+      #default_scope joins(:player).order('players.last_name DESC, players.first_name DESC')
 
       t.references :player, index: true, foreign_key: true
       t.references :tournament, index: true, foreign_key: true
