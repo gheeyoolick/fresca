@@ -9,12 +9,15 @@
 #TournamentType.create(tournament_type: 'INDIVIDUAL')
 #TournamentType.create(tournament_type: 'SCRAMBLE')
 #TournamentType.create(tournament_type: 'BEST BALL')
-tt = TournamentType.create(tournament_type: 'TWO-TEAM WITH MATCH(ES)')
+tt = TournamentType.create(tournament_type: 'TWO-TEAM WITH MATCHES')
 
 #RoundType.create(round_type: 'INDIVIDUAL')
+RoundType.create(round_type: 'INDIVIDUAL')
 RoundType.create(round_type: 'SCRAMBLE')
 RoundType.create(round_type: 'BEST BALL')
-RoundType.create(round_type: 'HEAD-TO-HEAD')
+RoundType.create(round_type: 'MATCH: SCRAMBLE', matches: true)
+RoundType.create(round_type: 'MATCH: BEST BALL', matches: true)
+RoundType.create(round_type: 'MACTH: HEAD-TO-HEAD', matches: true)
 
 fresca2012 = tt.tournaments.create(title: 'FRESCA 2012', subtitle: '', tournament_date: '6/1/2012', location: 'Pebble Beach', handicap: true, tournament_handicap_only: true, male_players: true, female_players: false, started: true, complete: true)
 fresca2012.teams.create(name: 'Unnamed', team_number: 1)

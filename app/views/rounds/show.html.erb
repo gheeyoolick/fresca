@@ -1,0 +1,25 @@
+<h1><%= link_to 'Back to Tournament', tournament_path(@tournament) %></h1>
+  <p>
+  <strong>Tournament:</strong>
+    <%= @tournament.title %><% if @tournament.subtitle.length > 0 %>, <%=	@tournament.subtitle %><% end %>
+  <br />
+  <strong>Date:</strong>
+    <%= @tournament.tournament_date %>
+  <br />
+  <strong>Location:</strong>
+    <%= @tournament.location %>
+  <br />
+  </p>
+
+<h2>Round: <%= @round.round_number %></h2><br>
+Course: <%= @round.tee_box.course.name %><br>
+Tee Box: <%= @round.tee_box.color %> | <%= @round.tee_box.course_rating %>/<%= @round.tee_box.course_slope %> | <%= @round.tee_box.total_yardage %> Yards <br>
+<% if @tournament.two_team? and @round.started? %>
+  <% if not @round.complete? %>
+    NEED TO DISPLAY ONGOING ROUND SCORE
+  <% else %>
+    NEED TO DISPLAY COMEPLETED ROUND SCORE
+  <% end %>
+<% end %>
+
+<%= link_to 'Back to Tournament', tournament_path(@round.tournament) %>

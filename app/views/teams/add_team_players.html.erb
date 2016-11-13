@@ -1,13 +1,22 @@
 <h1><%= link_to 'Back to Tournament', tournament_path(@team.tournament) %></h1>
   <p>
   <strong>Tournament:</strong>
-    <%= @team.tournament.title %><% if @team.tournament.subtitle.length > 0 %>, <%=	@team.tournament.subtitle %><% end %>
+  <%= @team.tournament.title %><% if @team.tournament.subtitle.length > 0 %>, <%=	@team.tournament.subtitle %><% end %>
   <br />
   <strong>Date:</strong>
-    <%= @team.tournament.tournament_date %>
+  <%= @team.tournament.tournament_date %>
   <br />
   <strong>Location:</strong>
-    <%= @team.tournament.location %>
+  <%= @team.tournament.location %>
+  <br />
+  <strong>Type:</strong>
+  <%= @team.tournament.tournament_type.tournament_type %>
+  <br />
+  <strong>Use Handicap?:</strong>
+  <%= @team.tournament.handicap? %>
+  <br />
+  <strong>Use Tournament Handicap Only, rather than Course Specific Handicap?:</strong>
+  <%= @team.tournament.tournament_handicap_only? %>
   <br />
   </p>
 

@@ -96,17 +96,17 @@ ActiveRecord::Schema.define(version: 20150930011331) do
 
   create_table "round_types", force: :cascade do |t|
     t.string   "round_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "matches",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "rounds", force: :cascade do |t|
     t.date     "round_date"
+    t.integer  "round_number",             default: 0
     t.boolean  "track_player_hole_scores", default: false
     t.boolean  "started",                  default: false
     t.boolean  "complete",                 default: false
-    t.integer  "number_of_holes",          default: 18
-    t.boolean  "par3",                     default: false
     t.integer  "round_type_id"
     t.integer  "tournament_id"
     t.integer  "tee_box_id"

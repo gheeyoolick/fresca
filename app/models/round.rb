@@ -14,7 +14,7 @@ class Round < ActiveRecord::Base
     puts "Round.get_next_round_number :: starting"
 
     puts "Round.get_next_round_number :: retrieving highest numbered round"
-    round = Round.where("tournament_id = ?", tournament_id).order("round_number DESC").take
+    round = Round.where("tournament_id = ?", tournament_id).order("round_number desc").take
 
 
     if round==nil
@@ -28,7 +28,7 @@ class Round < ActiveRecord::Base
 
   def self.reassign_tournament_round_numbers (tournament_id)
     puts "Round.reassign_tournament_round_numbers :: starting"
-    #need to implement 
+    #need to implement
   end
 
 end

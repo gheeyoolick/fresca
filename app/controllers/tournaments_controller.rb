@@ -13,7 +13,9 @@ class TournamentsController < ApplicationController
 	end
 
 	def edit
-  	@tournament = Tournament.find(params[:id])
+  	puts "TournamentController.edit :: starting"
+    @tournament = Tournament.find(params[:id])
+    puts "TournamentController.edit :: complete"
 	end
 
 	def create
@@ -32,11 +34,13 @@ class TournamentsController < ApplicationController
 	end
 
 	def update
-	  @tournament = Tournament.find(params[:id])
+	  puts "TournamentController.update :: starting :: id="+params[:id]
+    @tournament = Tournament.find(params[:id])
 
     #if tourney hasn't started and the update works
     if !@tournament.started? and @tournament.update(tournament_params)
-	    redirect_to @tournament
+	    puts "TournamentController.update :: started is false and update succeeded"
+      redirect_to @tournament
 	  else
 	    render 'edit'
 	  end
@@ -61,7 +65,38 @@ class TournamentsController < ApplicationController
 	  end
   end
 
-	def destroy
+  def select_course_for_tournament_round
+    puts "TournamentController.select_course_for_tournament_round :: starting"
+    #getting tournament with id
+    @tournament = Tournament.find(params[:tournament_id])
+    @round = @tournament.rounds.new
+    puts "TournamentController.select_course_for_tournament_round :: params="+params.to_s
+  end
+
+  def add_tournament_round
+    puts "TournamentsController.add_tournament_round :: starting"
+    #getting tournament by id
+    @tournament = Tournament.find(params[:id])
+    @course = Course.find(params[:course_id])
+
+  end
+
+  def save_tournament_round
+    puts "TournamentsController.save_tournament_round :: starting"
+
+    #getting tournament by id
+    @tournament = Tournament.find(params[:id])
+
+    #if tourney hasn't started and the update works
+    if !@tournament.started? and @tournament.update(tournament_params)
+      redirect_to @tournament
+	  else
+      render 'add_tournament_round'
+	  end
+  end
+
+
+  def destroy
   	@tournament = Tournament.find(params[:id])
   	@tournament.destroy
 

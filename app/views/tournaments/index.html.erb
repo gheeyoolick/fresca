@@ -8,6 +8,7 @@
     <th>Type</th>
     <th>Use Handicap?</th>
     <th>Tournmant Handicap Only?</th>
+    <th></th>
 	</tr>
 	<% @tournaments.each do |tournament| %>
 		<tr>
@@ -17,18 +18,14 @@
       <td><%= tournament.tournament_type.tournament_type %></td>
       <td><%= tournament.handicap? %></td>
       <td><%= tournament.tournament_handicap_only? %></td>
-      <% if !tournament.started? %>
-      <td><%= link_to 'Show/Configure', tournament_path(tournament) %></td>
-      <td><%= link_to 'Edit', edit_tournament_path(tournament) %></td>
-      <td><%= link_to 'Delete', tournament_path(tournament),
+      <% if not tournament.started? %>
+        <td><%= link_to 'Show/Configure', tournament_path(tournament) %> | <%= link_to 'Edit', edit_tournament_path(tournament) %> | <%= link_to 'Delete', tournament_path(tournament),
       			method: :delete,
       			data: { confirm: 'Are you sure?' } %></td>
-      <td>Start</td>
       <% elsif tournament.complete? %>
-      <td colspan=4>View Results</td>
+        <td>View Results</td>
       <% else %>
-      <td colspan=3>View Progress/Score</td>
-      <td>End</td>
+        <td>View Progress/Score</td>
       <% end %>
 		</tr>
 	<% end %>

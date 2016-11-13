@@ -10,6 +10,7 @@ class TeeBox < ActiveRecord::Base
   default_scope { order(:tee_box_type_id => :asc, :total_yardage_dirty => :desc)}
 
   has_many :holes, :dependent => :destroy
+  has_many :rounds, :dependent => :destroy
   accepts_nested_attributes_for :holes
   validates_associated :holes
 
@@ -43,6 +44,5 @@ class TeeBox < ActiveRecord::Base
   def number_of_holes
     self.holes.count
   end
-
 
 end

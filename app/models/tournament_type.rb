@@ -6,7 +6,7 @@ class TournamentType < ActiveRecord::Base
   @individual='INDIVIDUAL'
   @scramble='SCRAMBLE'
   @bestball='BEST BALL'
-  @twoteam='TWO-TEAM WITH MATCH(ES)'
+  @twoteam='TWO-TEAM WITH MATCHES'
 
   validates :tournament_type, presence: true
 

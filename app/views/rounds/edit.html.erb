@@ -1,0 +1,63 @@
+<h1><%= link_to 'Back to Tournament', tournament_path(@tournament) %></h1>
+  <p>
+  <strong>Tournament:</strong>
+    <%= @tournament.title %><% if @tournament.subtitle.length > 0 %>, <%=	@tournament.subtitle %><% end %>
+  <br />
+  <strong>Date:</strong>
+    <%= @tournament.tournament_date %>
+  <br />
+  <strong>Location:</strong>
+    <%= @tournament.location %>
+  <br />
+  </p>
+
+<h2>Edit Tournament Round</h2>
+<h2>Round <%= @round.round_number %>: <%= @course.name %></h2> | <a href='/tournaments/<%= @tournament.id %>/rounds/<%=@round.id%>/change_course_for_tournament_round/'>Change</a><br>
+
+<%= form_for ([@tournament, @round]) do |f| %>
+  <% if @round.errors.any? %>
+		<div id="error_explanation">
+      <h2><%= pluralize(@round.errors.count, "error") %> prohibited this round from being saved:</h2>
+		  	<ul>
+          <% @round.errors.full_messages.each do |msg| %>
+		    		<li><%= msg %></li>
+		    	<% end %>
+		    </ul>
+		</div>
+	<% end %>
+  <p><%= f.label :round_date %>: <%=f.text_field :round_date %>  (Format YYYY/MM/DD)</p>
+
+  <table>
+    <tr>
+      <th />
+      <th>Color</th>
+      <th>Rating/Slope</th>
+      <th>Yardage</th>
+    </tr>
+    <%
+      first = true
+      @course.tee_boxes.map.each do |tee_box|
+    %>
+    <tr>
+      <% if @changed_course %>
+        <td><%= f.radio_button :tee_box_id, tee_box.id, :checked => first %></td>
+      <% else %>
+        <td><%= f.radio_button :tee_box_id, tee_box.id %></td>
+      <% end %>
+      <td><%= tee_box.color %>(<%=tee_box.tee_box_type.tee_box_type %>)</td>
+      <td><%= tee_box.course_rating %>/<%= tee_box.course_slope %></td>
+      <td><%= tee_box.total_yardage %></td>
+    </tr>
+    <% first = false %>
+    <% end %>
+  </table>
+
+  <p><%= f.label :round_type, 'Round Type' %>:<%= @round.round_type.round_type %><%= f.hidden_field :round_type_id, :value => @round.round_type_id %>
+  </p>
+
+<p><%= f.label :track_player_hole_scores, "Track Player Hole Scores?" %>: <%= @round.track_player_hole_scores? %><%= f.hidden_field :track_player_hole_scores, :value => false %></p>
+  <p><%= f.submit %></p>
+
+<% end %>
+
+<%= link_to 'Back to Tournament', tournament_path(@round.tournament) %>

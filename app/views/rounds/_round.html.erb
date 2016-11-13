@@ -1,0 +1,18 @@
+<div>
+  <strong>Round <%= round.round_number %>: <%=round.round_type.round_type %></strong><br>
+  Course: <%= round.tee_box.course.name %><br>
+  Tee Box: <%= round.tee_box.color %> | <%= round.tee_box.course_rating %>/<%= round.tee_box.course_slope %> | <%= round.tee_box.total_yardage %> Yards <br>
+  <% if @tournament.two_team? and round.started? %>
+    <% if not round.complete? %>
+      NEED TO DISPLAY ONGOING ROUND SCORE
+    <% else %>
+      NEED TO DISPLAY COMEPLETED ROUND SCORE
+    <% end %>
+  <% end %>
+  <% if round.round_type.matches? %>
+    This Round Has Matches!<br>
+  <% end %>
+  Round: <%= link_to 'Show/Configure', tournament_round_path(round.tournament, round) %><% if not round.started? %> | <%= link_to 'Edit', edit_tournament_round_path(round.tournament, round) %> | <%= link_to 'Delete', [round.tournament, round],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %><% end %>
+</div>

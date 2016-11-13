@@ -16,12 +16,12 @@
     <%= @tournament.handicap? %>
     <br />
     <strong>Use Tournament Handicap Only, rather than Course Specific Handicap?:</strong>
-    <%= @tournament.tournament_handicap_only? %>  
+    <%= @tournament.tournament_handicap_only? %>
   </p>
 
-<h2>Add Player to Tournament</h2>
+<h2>Change Course for Round <%= @round.round_number %>: <%= @round.round_type.round_type %></h2>
 
-<%= form_for :tournament, url: {action: "save_tournament_players"} do |f| %>
+<%= form_for :round, url: edit_tournament_round_path, method: :get do |f| %>
 <% if @tournament.errors.any? %>
 		<div id="error_explanation">
       <h2><%= pluralize(@tournament.errors.count, "error") %> prohibited this tournament from being saved:</h2>
@@ -33,10 +33,14 @@
 		</div>
 	<% end %>
   <p>
-    <%= hidden_field_tag "tournament[player_ids][]" %> <% Tournament.get_eligible_players(@tournament.id).order(:last_name, :first_name).each do |player| %> <%= check_box_tag "tournament[player_ids][]", player.id, @tournament.player_ids.include?(player.id)%> <%= player.name_combo %> <br /><% end %>
+    <select name="course_id" id="course_ids" />
+      <% course_array = Course.all.order("number_of_holes desc", :name).map { |course| [course.name_and_number_of_holes, course.id] } %>
+      <%= options_for_select(course_array) %>
+    </select>
   </p>
+  <input type="hidden" name="change_course" value="true">
   <p>
-    <%= f.submit "Add Players to Tournament" %>
+    <%= f.submit "Select" %>
   </p>
 <% end %>
 

@@ -5,9 +5,12 @@ class RoundType < ActiveRecord::Base
   @individual='INDIVIDUAL'
   @scramble='SCRAMBLE'
   @bestball='BEST BALL'
-  @headtohead='HEAD-TO-HEAD'
+  @matchscramble='MATCH: SCRAMBLE'
+  @matchbestball='MATCH: BEST BALL'
+  @matchheadtohead='MATCH: HEAD-TO-HEAD'
 
   validates :round_type, presence: true
 
   has_many :rounds
+
 end

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   #   resources :products
   resources :players
   resources :tournaments do
-    resources :rounds, :teams
+    resources :teams, :rounds
     resources :tournament_players, :only => [:edit, :update, :destroy]
   end
   resources :courses do
@@ -29,7 +29,11 @@ Rails.application.routes.draw do
 
   get 'tournaments/:tournament_id/teams/:team_id/add_team_players', to: 'teams#add_team_players', as: :add_team_players
   post 'tournaments/:tournament_id/teams/:team_id/save_team_players', to: 'teams#save_team_players', as: :save_team_players
-  
+
+  get 'tournaments/:tournament_id/select_course_for_tournament_round', to: 'tournaments#select_course_for_tournament_round', as: :select_course_for_tournament_round
+
+  get 'tournaments/:tournament_id/rounds/:id/change_course_for_tournament_round', to: 'rounds#change_course_for_tournament_round', as: :change_course_for_tournament_round
+
   # Example resource route with options:
   #   resources :products do
   #     member do

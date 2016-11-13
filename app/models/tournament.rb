@@ -7,6 +7,8 @@ class Tournament < ActiveRecord::Base
   belongs_to :tournament_type
 
   has_many :rounds, :dependent => :destroy
+  accepts_nested_attributes_for :rounds
+  validates_associated :rounds
 
   has_many :tournament_players, :dependent => :destroy
   has_many :players, :through => :tournament_players
@@ -26,6 +28,10 @@ class Tournament < ActiveRecord::Base
     #players = Player.where.not(id: player_array)
     #players
     Player.all
+  end
+
+  def two_team? ()
+    true
   end
 
 end

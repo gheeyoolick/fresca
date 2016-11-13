@@ -1,33 +1,78 @@
-<h1><%= link_to 'Back to Tournament', tournament_path(@round.tournament) %></h1>
-  <p>
+<h1><%= link_to 'Back to Tournament', tournament_path(@tournament) %></h1>
   <strong>Tournament:</strong>
-    <%= @round.tournament.title %><% if @round.tournament.subtitle.length > 0 %>, <%=	@round.tournament.subtitle %><% end %>
+  <%= @tournament.title %><% if @tournament.subtitle.length > 0 %>, <%=	@tournament.subtitle %><% end %>
   <br />
   <strong>Date:</strong>
-    <%= @round.tournament.tournament_date %>
+  <%= @tournament.tournament_date %>
   <br />
   <strong>Location:</strong>
-    <%= @round.tournament.location %>
+  <%= @tournament.location %>
   <br />
-  </p>
+  <strong>Type:</strong>
+  <%= @tournament.tournament_type.tournament_type %>
+  <br />
+  <strong>Use Handicap?:</strong>
+  <%= @tournament.handicap? %>
+  <br />
+  <strong>Use Tournament Handicap Only, rather than Course Specific Handicap?:</strong>
+  <%= @tournament.tournament_handicap_only? %>
+  <br />
 
-<h2>Add Round to Tournament</h2>
+<h2>New Round at <%= @course.name %>, <%= @course.number_of_holes %> Holes</h2>
 
-<%= form_for ([@round.tournament, @round]) do |f| %>
-  <% if @round.errors.any? %>
+<%= form_for :round, url: tournament_rounds_path do |f| %>
+
+	<% if @round.errors.any? %>
 		<div id="error_explanation">
-      <h2><%= pluralize(@round.errors.count, "error") %> prohibited this team from being saved:</h2>
+		  <h2><%= pluralize(@round.errors.count, "error") %> prohibited this round from being saved:</h2>
 		  	<ul>
-          <% @round.errors.full_messages.each do |msg| %>
+		    	<% @round.errors.full_messages.each do |msg| %>
 		    		<li><%= msg %></li>
 		    	<% end %>
 		    </ul>
 		</div>
 	<% end %>
-  <p><%= f.label :round_date %>: <%=f.text_field :round_date %></p>
-  <p><%= f.label :track_player_hole_scores %>: <%=f.text_field :track_player_hole_scores %></p>
-  <p>List courses here</p>
+
+  <p><%= f.label :round_date %>: <%=f.text_field :round_date %>  (Format YYYY/MM/DD)</p>
+
+  <h3>Select Tee Box</h3>
+  <p>
+  <table>
+    <tr>
+      <th />
+      <th>Color</th>
+      <th>Rating/Slope</th>
+      <th>Yardage</th>
+    </tr>
+    <%
+        first = true
+        @course.tee_boxes.map.each do |tee_box|
+    %>
+    <tr>
+      <td><%= f.radio_button :tee_box_id, tee_box.id, :checked => first %></td>
+      <td><%= tee_box.color %>(<%=tee_box.tee_box_type.tee_box_type %>)</td>
+      <td><%= tee_box.course_rating %>/<%= tee_box.course_slope %></td>
+      <td><%= tee_box.total_yardage %></td>
+    </tr>
+    <% first = false %>
+    <% end %>
+  </table>
+  </p>
+  <p><%= f.label :round_type, 'Round Type' %>:
+    <% if @tournament.tournament_type.tournament_type == TournamentType.individual %>
+      <%= RoundType.individual %><%= f.hidden_field :round_type_id, :value => RoundType.where(round_type: RoundType.individual).id %>
+    <% elsif @tournament.tournament_type.tournament_type == TournamentType.scramble %>
+      <%= RoundType.scramble %><%= f.hidden_field :round_type_id, :value => RoundType.where(round_type: RoundType.scramble).id %>
+    <% elsif @tournament.tournament_type.tournament_type == TournamentType.bestball %>
+      <%= RoundType.bestball %><%= f.hidden_field :round_type_id, :value => RoundType.where(round_type: RoundType.bestball).id %>
+    <% elsif @tournament.tournament_type.tournament_type == TournamentType.twoteam %>
+      <%= f.collection_select :round_type_id, RoundType.where(matches: true), :id, :round_type %>Note: Once saved, the Round Type cannot be changed.
+    <% end %>
+  </p>
+
+<p><%= f.label :track_player_hole_scores, "Track Player Hole Scores?" %>: <%= @round.track_player_hole_scores? %><%= f.hidden_field :track_player_hole_scores, :value => false %></p>
   <p><%= f.submit %></p>
+
 <% end %>
 
 <%= link_to 'Back to Tournament', tournament_path(@round.tournament) %>
